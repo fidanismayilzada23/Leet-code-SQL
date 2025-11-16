@@ -1,0 +1,6 @@
+182. Duplicate Emails
+
+select Email from (
+    select email, count(email) as c from Person 
+        group by email
+    		having count(email) >=2)
