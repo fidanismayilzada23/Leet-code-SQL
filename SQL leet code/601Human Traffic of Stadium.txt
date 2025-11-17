@@ -1,0 +1,15 @@
+601. Human Traffic of Stadium
+
+with new as(select id,visit_date , people,
+ id -Row_number() over (Order by id) as diff 
+ from Stadium 
+ where people >=100)
+ 
+ select id,visit_date, people 
+ from new 
+ where diff in (
+    select diff from new 
+    group by diff
+    having count(*)>=3
+ )
+ order by visit_date

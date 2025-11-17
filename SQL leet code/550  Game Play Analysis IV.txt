@@ -1,0 +1,9 @@
+550. Game Play Analysis IV
+
+select Round ( 1.0 * count(player_id)/(select count( distinct player_id) from Activity),2) as Fraction 
+from Activity 
+WHERE (player_id, event_date) IN (
+    SELECT player_id, MIN(event_date) + 1
+    FROM Activity
+    GROUP BY player_id
+)

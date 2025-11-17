@@ -1,0 +1,6 @@
+585. Investments in 2016
+
+select round(sum(tiv_2016)::decimal,2) as tiv_2016 from (
+select , count() over(partition by tiv_2015) as cnt2015,
+count(*) over(partition by lat, lon) as cntlatlon from Insurance)
+where cnt2015>1 and cntlatlon=1
